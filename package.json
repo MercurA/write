@@ -1,5 +1,5 @@
 {
-  "description": "An experimental project to create an app for writters",
+  "description": "An experimental project to create an app for writers",
   "keywords": [
     "electron",
     "react",
@@ -19,7 +19,7 @@
   "license": "MIT",
   "author": {
     "name": "Write",
-    "email": "constandacheh@gmail.com",
+    "email": "constandacheh@gmail.com"
   },
   "main": "./src/main/main.ts",
   "scripts": {
