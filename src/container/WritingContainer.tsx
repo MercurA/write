@@ -15,7 +15,7 @@ function WritingContainer() {
   const handleFormatStyle = (value: string): void => {
     setFormatStyle({
       ...formatStyle,
-      [value]: !formatStyle[value]
+      [value]: !formatStyle[value as keyof FontStyle],
     });
   };
   useEffect(() => {
