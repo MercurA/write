@@ -35,6 +35,14 @@ function MainContainer() {
     return () => window.addEventListener('keydown', handleKeyDown);
   }, []);
 
+  const handleFormatStyle = (value: string): void => {
+    setFormatStyle({
+      ...formatStyle,
+      [value]: !formatStyle[value]
+    });
+    console.log(formatStyle);
+  };
+
   const sanitizedData = () => ({
     __html: DOMPurify.sanitize(text),
   });
@@ -47,21 +55,14 @@ function MainContainer() {
           <div
             className="boldStyle"
             aria-hidden="true"
-            onClick={() =>
-              setFormatStyle({ ...formatStyle, isBold: !formatStyle.isBold })
-            }
+            onClick={() => handleFormatStyle('isBold')}
           >
             B
           </div>
           <div
             className="italicStyle"
             aria-hidden="true"
-            onClick={() =>
-              setFormatStyle({
-                ...formatStyle,
-                isItalic: !formatStyle.isItalic,
-              })
-            }
+            onClick={() => handleFormatStyle('isItalic')}
           >
             I
           </div>

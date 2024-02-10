@@ -18,7 +18,7 @@
 
 .menu {
   position: absolute;
-  width: 10%;
+  width: 100px;
   left: 50%;
   transform: translate(-50%, 0);
   background-color: white;
@@ -30,7 +30,7 @@
 .boldStyle {
   cursor: pointer;
   font-weight: 700;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .italicStyle {
   cursor: pointer;

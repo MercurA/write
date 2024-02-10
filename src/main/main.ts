@@ -1,7 +1,10 @@
 import path from 'path';
 import { app, BrowserWindow, shell, ipcMain, session } from 'electron';
 import { autoUpdater } from 'electron-updater';
-import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
+import installExtension, {
+  REDUX_DEVTOOLS,
+  REACT_DEVELOPER_TOOLS,
+} from 'electron-devtools-installer';
 import log from 'electron-log';
 import os from 'node:os';
 import MenuBuilder from './menu';
@@ -18,7 +21,6 @@ let mainWindow: BrowserWindow | null = null;
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
@@ -33,13 +35,16 @@ const isDebug =
 if (isDebug) {
   require('electron-debug')();
 };
-
-
+const reactDevToolsPath = path.join(
+  os.homedir(),
+  '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi',
+)
 const createWindow = async () => {
   if (isDebug) {
     installExtension(REDUX_DEVTOOLS)
       .then((name) => console.log(`Added Extension:  ${name}`))
       .catch((err) => console.log('An error occurred: ', err));
+    await session.defaultSession.loadExtension(reactDevToolsPath)
   }
 
   const RESOURCES_PATH = app.isPackaged
