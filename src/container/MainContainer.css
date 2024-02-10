@@ -36,3 +36,7 @@
   cursor: pointer;
   font-style: italic;
 }
+
+.fontStyle {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}

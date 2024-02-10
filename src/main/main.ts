@@ -1,14 +1,12 @@
 import path from 'path';
 import { app, BrowserWindow, shell, ipcMain, session } from 'electron';
 import { autoUpdater } from 'electron-updater';
-import installExtension, {
-  REDUX_DEVTOOLS,
-  REACT_DEVELOPER_TOOLS,
-} from 'electron-devtools-installer';
+import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
 import log from 'electron-log';
 import os from 'node:os';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+
 class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -34,17 +32,17 @@ const isDebug =
 
 if (isDebug) {
   require('electron-debug')();
-};
+}
+
 const reactDevToolsPath = path.join(
   os.homedir(),
   '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi',
-)
+);
+
 const createWindow = async () => {
   if (isDebug) {
     installExtension(REDUX_DEVTOOLS)
-      .then((name) => console.log(`Added Extension:  ${name}`))
-      .catch((err) => console.log('An error occurred: ', err));
-    await session.defaultSession.loadExtension(reactDevToolsPath)
+    await session.defaultSession.loadExtension(reactDevToolsPath);
   }
 
   const RESOURCES_PATH = app.isPackaged
@@ -119,5 +117,6 @@ app
       // dock icon is clicked and there are no other windows open.
       if (mainWindow === null) createWindow();
     });
+    return null;
   })
   .catch(console.log);
