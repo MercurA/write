@@ -1,4 +1,7 @@
+import { FontStyle } from '../../container/interfaces';
+
 export interface FormatingMenuProps {
+  formatStyle: FontStyle;
   handleFormatStyle: (el: string) => void;
 }
 
