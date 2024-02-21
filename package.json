@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "author": {
-    "name": "Write",
+    "name": "Mercurius",
     "email": "constandacheh@gmail.com"
   },
   "main": "./src/main/main.ts",
@@ -84,12 +84,12 @@
     }
   },
   "dependencies": {
-    "dompurify": "^3.0.8",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^6.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {

@@ -1,0 +1,30 @@
+.colorMenu {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.menuDrawer {
+  position: absolute;
+  top: 100%;
+}
+
+.box {
+  width: 18px;
+  height: 18px;
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.yellow {
+  background-color: yellow;
+}

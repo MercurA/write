@@ -119,4 +119,6 @@ app
     });
     return null;
   })
-  .catch(console.log);
+  .catch((error) => {
+    console.log(error);
+  });
