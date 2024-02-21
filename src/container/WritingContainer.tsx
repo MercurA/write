@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import DOMPurify from 'dompurify';
 import ReactMarkdown from 'react-markdown';
 
 import './MainContainer.css';
-import FormatingMenu from '../components/menu/FormatingMenu';
+// import FormatingMenu from '../components/menu/FormatingMenu';
 import { FontStyle } from './interfaces';
 
 function WritingContainer() {
@@ -13,12 +12,12 @@ function WritingContainer() {
     isItalic: false,
   });
 
-  const handleFormatStyle = (value: string): void => {
-    setFormatStyle({
-      ...formatStyle,
-      [value]: !formatStyle[value as keyof FontStyle],
-    });
-  };
+  // const handleFormatStyle = (value: string): void => {
+  //   setFormatStyle({
+  //     ...formatStyle,
+  //     [value]: !formatStyle[value as keyof FontStyle],
+  //   });
+  // };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -43,7 +42,6 @@ function WritingContainer() {
           const removedText = nText.slice(0, text.length - 1).join('');
           setText(removedText);
         } else if (e.key === 'Enter') {
-          console.log(e.key);
           const nText = text.split(',');
           setText([...nText, '\n'].join(''));
         } else {
