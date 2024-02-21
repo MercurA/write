@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
+import ReactMarkdown from 'react-markdown';
 
 import './MainContainer.css';
 import FormatingMenu from '../components/menu/FormatingMenu';
 import { FontStyle } from './interfaces';
 
 function WritingContainer() {
-  const [text, setText]: [string[], any] = useState([]);
+  const [text, setText]: [string, any] = useState('');
   const [formatStyle, setFormatStyle]: [FontStyle, any] = useState({
     isBold: false,
     isItalic: false,
@@ -18,36 +19,50 @@ function WritingContainer() {
       [value]: !formatStyle[value as keyof FontStyle],
     });
   };
-  useEffect(() => {
-    let newText: string[] = [];
 
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === 'b') {
+        setFormatStyle({ ...formatStyle, isBold: !formatStyle.isBold });
+        setText(text.concat('**'));
+        return;
+      }
+
+      if (e.ctrlKey && e.key === 'i') {
+        setFormatStyle({ ...formatStyle, isItalic: !formatStyle.isItalic });
+        setText(text.concat('*'));
+        return;
+      }
+
       if (e.key) {
-        if (e.key === 'Shift' || e.key === 'Meta') {
+        if (e.key === 'Shift' || e.key === 'Meta' || e.ctrlKey) {
           return;
         }
         if (e.key === 'Backspace') {
-          newText = newText.slice(0, newText.length - 1);
+          const nText = text.split('');
+          const removedText = nText.slice(0, text.length - 1).join('');
+          setText(removedText);
         } else if (e.key === 'Enter') {
-          newText.push('<br>');
+          console.log(e.key);
+          const nText = text.split(',');
+          setText([...nText, '\n'].join(''));
         } else {
-          newText.push(e.key);
+          const nText = text.split(',');
+          const concatText = [...nText, e.key].join('');
+          setText(concatText);
         }
-        setText(newText);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.addEventListener('keydown', handleKeyDown);
-  }, []);
-
-  const sanitizedData = () => ({
-    __html: DOMPurify.sanitize(text.join('')),
-  });
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [formatStyle, text]);
 
   return (
     <div className="writingContainer" id="writeBox">
-      <FormatingMenu handleFormatStyle={handleFormatStyle} />
-      <pre className="fontStyle" dangerouslySetInnerHTML={sanitizedData()} />
+      {/* <FormatingMenu handleFormatStyle={handleFormatStyle} /> */}
+      <pre>
+        <ReactMarkdown>{text}</ReactMarkdown>
+      </pre>
     </div>
   );
 }
