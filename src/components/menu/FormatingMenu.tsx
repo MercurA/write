@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormatingMenuProps } from './interfaces';
 import './FormatingMenu.css';
 
@@ -20,6 +20,10 @@ function FormatingMenu({ handleFormatStyle, formatStyle }: FormatingMenuProps) {
   const [open, setOpen]: [boolean, any] = useState(false);
   const [colorSelected, setColorSelection]: [string, any] = useState(colors[0]);
 
+  useEffect(() => {
+    console.log('useEffect', formatStyle.isBold);
+  }, [formatStyle.isBold]);
+
   const handleColorSelection = (e: any) => {
     setColorSelection(e.target.id);
   };
@@ -29,7 +33,6 @@ function FormatingMenu({ handleFormatStyle, formatStyle }: FormatingMenuProps) {
   };
 
   const { isBold, isItalic } = formatStyle;
-
   return (
     <div className="menu">
       <div

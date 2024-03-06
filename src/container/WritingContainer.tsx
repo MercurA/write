@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 
 import './MainContainer.css';
 import FormatingMenu from '../components/menu/FormatingMenu';
@@ -72,7 +74,10 @@ function WritingContainer() {
         formatStyle={formatStyle}
       />
       <pre>
-        <ReactMarkdown>{text}</ReactMarkdown>
+        <ReactMarkdown
+          children={text}
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}/>
       </pre>
     </div>
   );
